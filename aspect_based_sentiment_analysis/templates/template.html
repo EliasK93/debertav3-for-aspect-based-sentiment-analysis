@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DeBERTaV3 - ABSA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="row justify-content-center my-4">
+    <div class="col-sm-10">
+        <div class="jumbotron">
+            <center><h1>DeBERTaV3</h1></center>
+            <center><h2>Sequence Labeling Model trained for Aspect Based Sentiment Analysis</h2></center>
+        </div>
+    </div>
+</div>
+<form action="/" method="POST">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 jumbotron">
+            <div>
+                <textarea class="form-control mb-5" placeholder="Paste Review text here..." name="unlabeled_text"
+                          id="unlabeled_text" style="width:100%; height:150px;">{{ unlabeled_text }}</textarea>
+            </div>
+        </div>
+        <div class="col-sm-2 d-flex align-items-center justify-content-center">
+            <button type="submit" class="btn btn-success" style="width:60%; height:200px;"><b>&#10132; &#10132; &#10132;</b><br><br>Predict Labels<br><br><b>&#10132; &#10132; &#10132;</b></button>
+        </div>
+        <div class="col-sm-4 jumbotron align-items-center justify-content-center">  <!--d-flex align-items-center justify-content-center-->
+            <!-- iterate over sentence sublists (token lists):
+            set background-color depending on label value &
+            include the space before a token for background coloring only if it's an 'I-' label -->
+            {% for sentence in labeled_text %}
+            <div>
+                {% for token in sentence %}{% if token[1].startswith('I-') %}<span{% else %} <span{% endif %}{% if token[1].endswith('-positive') %}
+                            style='background-color: green;'
+                        {% elif token[1].endswith('-negative') %}
+                            style='background-color: red;'
+                        {% elif token[1].endswith('-neutral') %}
+                            style='background-color: gray;'
+                        {% elif token[1].endswith('-conflict') %}
+                            style='background-color: purple;'
+                        {% endif %}>{% if token[1].startswith('I-') %} {{ token[0] }}</span>{% else %}{{ token[0] }}</span>{% endif %}{% endfor %}
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

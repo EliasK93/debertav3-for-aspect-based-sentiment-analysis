@@ -1,0 +1,15 @@
+              precision    recall  f1-score   support
+
+    conflict     0.0000    0.0000    0.0000         2
+    negative     0.8421    0.8000    0.8205        20
+     neutral     0.2500    0.5556    0.3448         9
+    positive     0.7778    0.7000    0.7368        50
+
+   micro avg     0.6588    0.6914    0.6747        81
+   macro avg     0.4675    0.5139    0.4755        81
+weighted avg     0.7158    0.6914    0.6958        81
+
+eval_loss = 0.18550481880650777
+f1_score = 0.674698795180723
+precision = 0.6588235294117647
+recall = 0.691358024691358
