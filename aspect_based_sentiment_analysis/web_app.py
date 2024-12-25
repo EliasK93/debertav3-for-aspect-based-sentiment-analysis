@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route("/", methods=['GET'])
-def index():
+def index() -> str:
     """
     GET-controller method for start page / main form
 
@@ -19,7 +19,7 @@ def index():
 
 
 @app.route("/", methods=['POST'])
-def label():
+def label() -> str:
     """
     POST-controller method to process form input and label a review text within main form
 
@@ -29,9 +29,9 @@ def label():
     return get_html_form(unlabeled_text=unlabeled_text, labeled_text=text_labeler.label(unlabeled_text))
 
 
-def get_html_form(unlabeled_text, labeled_text):
+def get_html_form(unlabeled_text: str, labeled_text) -> str:
     """
-    helper method to pass settings to jinja for parsing the template from templates/template.html
+    Helper method to pass settings to jinja for parsing the template from templates/template.html
 
     :param unlabeled_text: review text to label (if empty, placeholder instruction is shown)
     :param labeled_text: labeled text to be shown in main form

@@ -59,11 +59,11 @@ The frontend and routing is implemented in [Flask](https://flask.palletsprojects
 
 ### Requirements
 
-##### - Python >= 3.8
+##### - Python >= 3.10
 
 ##### - Conda
-  - `pytorch==1.7.1`
-  - `cudatoolkit=10.1`
+  - `pytorch==2.6.0`
+  - `cudatoolkit=12.6`
 
 ##### - pip
   - `simpletransformers`
@@ -80,5 +80,5 @@ The frontend and routing is implemented in [Flask](https://flask.palletsprojects
 
 ### Notes
 
-The uploaded versions of the training data in this repository are cut off after the first 1000 rows of each file, the 
+The uploaded versions of the training data in this repository are cut off after the first 1.000 rows of each file, the 
 real training data contains a combined ~90.000 rows. The trained model file `pytorch_model.bin` is omitted in this repository.

@@ -1,12 +1,11 @@
 import os
-from typing import Tuple
 import pandas
 from simpletransformers.ner import NERModel, NERArgs
 
 
-def train(model_type: Tuple[str, str], num_train_epochs: int, seed: int):
+def train(model_type: tuple[str, str], num_train_epochs: int, seed: int):
     """
-    Loads the pretrained model, trains it on the train set for the given seed and saves it to /trained_models
+    Load the pretrained model, train it on the train set for the given seed and save it to /trained_models
 
     :param model_type: tuple (general model type, official transformer model_id on huggingface)
     :param num_train_epochs: number of epochs to train the model for
@@ -34,14 +33,9 @@ def train(model_type: Tuple[str, str], num_train_epochs: int, seed: int):
     # skip detailed evaluation during training to make training quicker
     model_args.evaluate_during_training = False
     model_args.evaluate_during_training_verbose = False
-    # deactivate multiprocessing as it causes problems in combination with gpu usage
-    model_args.use_multiprocessing = False
-    model_args.use_multiprocessing_for_evaluation = False
     # do not save detailed evaluation and full model after each epoch or checkpoint
     model_args.save_eval_checkpoints = False
     model_args.save_model_every_epoch = False
-    # save the best model to /best_model once training is done
-    model_args.save_best_model = True
     # print classification report once the training is done
     model_args.classification_report = True
     # set custom output path

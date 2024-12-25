@@ -1,14 +1,7 @@
-import logging
-from typing import Tuple, List, Union
 import pandas
 import spacy
 from simpletransformers.ner import NERModel
 from spacy.tokens.doc import Doc
-
-
-logging.basicConfig(level=logging.ERROR)
-logging.getLogger("transformers").setLevel(logging.ERROR)
-logging.getLogger("simpletransformers").setLevel(logging.ERROR)
 
 
 class TextLabeler:
@@ -23,7 +16,7 @@ class TextLabeler:
         self.nlp.add_pipe('sentencizer')
         print("done")
 
-    def label(self, unlabeled_text: str) -> Union[List[List[Tuple[str, str]]], None]:
+    def label(self, unlabeled_text: str) -> list[list[tuple[str, str]]] | None:
         """
         Label a review by first preprocessing it using the loaded SpaCy model, converting it into simpletransformers-
         readable format and then running simpletransformers model inference on it.
@@ -40,7 +33,7 @@ class TextLabeler:
             return labeled_output
         return None
 
-    def get_processed_df(self, processed_doc: spacy.tokens.doc.Doc) -> Union[Tuple[List[List[str]], List[List[str]]], None]:
+    def get_processed_df(self, processed_doc: spacy.tokens.doc.Doc) -> tuple[list[list[str]], list[list[str]]] | None:
         """
         Helper method to convert processed SpaCy doc object containing word and sentence tokenization information into
         simpletransformers-format pandas DataFrame, run model inference on it and return nested lists of tokens and
